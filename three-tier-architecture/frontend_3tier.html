@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Three-Tier Demo</title>
+    <style>
+        body { font-family: Arial; text-align: center; background: #fdfcf0; }
+        .box { border: 2px solid #28a745; padding: 20px; display: inline-block; border-radius: 8px; background: white; }
+    </style>
+</head>
+<body>
+    <h1>Three-Tier Architecture (with DB)</h1>
+    <div class="box">
+        <button onclick="fetchInventory()">Check Inventory</button>
+        <div id="output">
+            <p>Database results will appear here...</p>
+        </div>
+    </div>
+
+    <script>
+        function fetchInventory() {
+            fetch('http://127.0.0.1:5001/api/inventory')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('output').innerHTML = 
+                    `Fetched from <b>${data.db_type}</b>: <br> 
+                     Item: ${data.item_name} | Count: ${data.quantity}`;
+                });
+        }
+    </script>
+</body>
+</html>

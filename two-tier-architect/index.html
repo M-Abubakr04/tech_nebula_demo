@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DevOps Full Stack Test</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+        #data-container { border: 2px solid #333; padding: 20px; display: inline-block; border-radius: 10px; background: #f4f4f4; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>Frontend - Backend Integration</h1>
+    <button onclick="getDataFromBackend()">Click to Call API</button>
+    <br><br>
+
+    <div id="data-container">
+        <p id="display">Data will appear here...</p>
+    </div>
+
+    <script>
+        function getDataFromBackend() {
+            // The magic happens here: Fetching data from your Flask API
+            fetch('http://127.0.0.1:5000/api/data')
+                .then(response => response.json())
+                .then(data => {
+                    // Updating the screen with backend data
+                    document.getElementById('display').innerHTML = 
+                        `<strong>Message:</strong> ${data.message} <br> 
+                         <strong>Status:</strong> ${data.status}`;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('display').innerText = "Backend is offline!";
+                });
+        }
+    </script>
+</body>
+</html>
